@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/bagustri3/PT.Phincon.git/initializer"
+	"github.com/bagustri3/PT.Phincon.git/controller"
 	"github.com/gin-gonic/gin"
 )
 
@@ -13,11 +14,11 @@ func init() {
 func main() {
 
 	r := gin.Default()
+	
+	r.POST("/user", controllers.AddUser)
 
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H {
-			"message" : "asep",
-		})
-	})
+	r.POST("/attend", controllers.PostAttend)
+	r.GET("/attend", controllers.GetAttend)
+
 	r.Run()
 }
