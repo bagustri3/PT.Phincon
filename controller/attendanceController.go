@@ -10,11 +10,11 @@ import (
 
 func AddUser(c *gin.Context) {
 	var body struct {
-		name string
+		Name string
 	}
 	c.Bind(&body)
 
-	user := models.User{Name: body.name}
+	user := models.User{Name: body.Name}
 
 	result := initializer.DB.Create(&user)
 
