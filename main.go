@@ -18,7 +18,7 @@ func main() {
 	r.POST("/user", controllers.AddUser)
 
 	r.POST("/attend", controllers.PostAttend)
-	r.GET("/attend", controllers.GetAttend)
+	r.GET("/attend/:id", controllers.GetAttend)
 
 	r.Run()
 }

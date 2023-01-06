@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"time"
 
 	"github.com/bagustri3/PT.Phincon.git/initializer"
 	"github.com/bagustri3/PT.Phincon.git/models"
@@ -35,7 +36,7 @@ func PostAttend(c *gin.Context) {
 
 	c.Bind(&body)
 
-	attendance := models.Attendance{UserId: body.UserId, Date: body.Date, Status: body.Status}
+	attendance := models.Attendance{UserId: body.UserId, Date: time.Now().Format(time.RFC822), Status: body.Status}
 
 	result := initializer.DB.Create(&attendance)
 
@@ -51,5 +52,13 @@ func PostAttend(c *gin.Context) {
 }
 
 func GetAttend(c *gin.Context) {
+	id := c.Param("id")
 
+	var attend []models.Attendance
+
+	initializer.DB.Find(&attend, "user_id =?", id)
+
+	c.JSON(200, gin.H{
+		"attendances": attend,
+	})
 }
